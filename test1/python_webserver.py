@@ -2,7 +2,9 @@
 
 from http.server import BaseHTTPRequestHandler, SimpleHTTPRequestHandler, HTTPServer
 from socketserver import ThreadingMixIn
+
 # import mon_module
+from traitementJson import TraitementJson
 
 # globals
 listcmd=["bouton1","bouton2"]
@@ -11,6 +13,8 @@ class GetHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         cmd=self.path[1:8]
 	# HERE YOU SHOULD PROBABLY DO SOMETHING WITH cmd
+        json_trait = TraitementJson("buttons.json")
+        json_trait.upjson(cmd)
 
         message = cmd+' OK\n'
         self.send_response(200)
